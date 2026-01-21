@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel - CVProfy</title>
+    <link rel="stylesheet" href="/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+
+<body>
+    <div class="app-container">
+        <!-- LEFT: ADMIN SIDEBAR -->
+        <aside class="editor-pane">
+            <header class="editor-header">
+                <div class="logo">CVProfy</div>
+            </header>
+
+            <div class="scroll-content">
+                <div class="section-card" id="adminLoginCard">
+                    <h3><i class="fas fa-user-shield"></i> Admin Login</h3>
+                    <div class="form-group">
+                        <label>Email</label>
+                        <input type="email" id="adminEmail" placeholder="admin@example.com">
+                    </div>
+                    <div class="form-group">
+                        <label>Password</label>
+                        <input type="password" id="adminPassword" placeholder="••••••••">
+                    </div>
+                    <button class="btn btn-primary" id="adminLoginBtn">Sign in</button>
+                    <p id="adminLoginMsg" style="font-size: 0.8rem; margin-top: 0.75rem;"></p>
+                </div>
+            </div>
+        </aside>
+
+        <!-- RIGHT: ADMIN DASHBOARD -->
+        <main class="preview-pane">
+            <div class="preview-wrapper">
+                <div class="admin-dashboard admin-hidden" id="adminDashboard">
+                    <header class="admin-header-bar">
+                        <div>
+                            <h1 class="admin-title">Admin Dashboard</h1>
+                            <p class="admin-subtitle">Overview of usage, users, and activity for your CV builder.</p>
+                        </div>
+                        <div class="admin-toolbar">
+                            <select class="admin-select">
+                                <option>Last 7 days</option>
+                                <option>Last 30 days</option>
+                                <option>This year</option>
+                                <option>All time</option>
+                            </select>
+                            <input type="text" class="admin-search" placeholder="Search users or email...">
+                            <button type="button" class="admin-logout-btn" id="adminLogoutBtn">
+                                <i class="fas fa-sign-out-alt"></i>
+                                <span>Logout</span>
+                            </button>
+                        </div>
+                    </header>
+
+                    <div class="admin-grid">
+                        <div class="admin-card">
+                            <h3>Total Users</h3>
+                            <p class="admin-metric" id="metricTotalUsers">0</p>
+                        </div>
+                        <div class="admin-card">
+                            <h3>Premium Users</h3>
+                            <p class="admin-metric" id="metricPremiumUsers">0</p>
+                        </div>
+                        <div class="admin-card">
+                            <h3>Resumes Generated</h3>
+                            <p class="admin-metric" id="metricResumesGenerated">0</p>
+                        </div>
+                        <div class="admin-card">
+                            <h3>Today</h3>
+                            <p class="admin-metric" id="metricTodayGenerated">0</p>
+                        </div>
+                    </div>
+
+                    <div class="admin-layout">
+                        <section class="admin-panel admin-panel-main">
+                            <div class="admin-panel-header">
+                                <h2>Recent Users</h2>
+                                <span class="admin-tag">Live</span>
+                            </div>
+                            <table class="admin-table">
+                                <thead>
+                                    <tr>
+                                        <th>User</th>
+                                        <th>Email</th>
+                                        <th>Plan</th>
+                                        <th>Resumes</th>
+                                        <th>Last Active</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Hulk</td>
+                                        <td>hulk12@gmail.com</td>
+                                        <td><span class="badge badge-premium">Premium</span></td>
+                                        <td>5</td>
+                                        <td>2 min ago</td>
+                                    </tr>
+                                    <tr>
+                                        <td>John Doe</td>
+                                        <td>john@example.com</td>
+                                        <td><span class="badge badge-free">Free</span></td>
+                                        <td>2</td>
+                                        <td>18 min ago</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Sarah Lee</td>
+                                        <td>sarah.lee@example.com</td>
+                                        <td><span class="badge badge-premium">Premium</span></td>
+                                        <td>9</td>
+                                        <td>1 hour ago</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </section>
+
+                        <aside class="admin-panel admin-panel-side">
+                            <div class="admin-panel-header">
+                                <h2>Recent Activity</h2>
+                            </div>
+                            <ul class="activity-list">
+                                <li>
+                                    <span class="activity-dot"></span>
+                                    <div>
+                                        <p class="activity-title">New premium upgrade</p>
+                                        <p class="activity-meta">Hulk • 2 min ago</p>
+                                    </div>
+                                </li>
+                                <li>
+                                    <span class="activity-dot"></span>
+                                    <div>
+                                        <p class="activity-title">Resume downloaded</p>
+                                        <p class="activity-meta">Sarah Lee • 24 min ago</p>
+                                    </div>
+                                </li>
+                                <li>
+                                    <span class="activity-dot"></span>
+                                    <div>
+                                        <p class="activity-title">New user signed up</p>
+                                        <p class="activity-meta">john@example.com • 1 hour ago</p>
+                                    </div>
+                                </li>
+                            </ul>
+                        </aside>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="/admin.js"></script>
+</body>
+
+</html>
+

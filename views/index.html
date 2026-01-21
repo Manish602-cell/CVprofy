@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CVProfy</title>
+    <link rel="stylesheet" href="/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- Client-side HTML -> PDF so downloaded PDF matches the exact on-screen design -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" defer></script>
+</head>
+
+<body class="app-body">
+    <div class="app-container">
+        <!-- LEFT: EDITOR -->
+        <aside class="editor-pane">
+            <header class="editor-header">
+                <div class="logo">CVProfy</div>
+                <div class="template-selector">
+                    <select id="templateSelect">
+                        <option value="classic">Classic Template</option>
+                        <option value="modern">Modern Template</option>
+                        <option value="bold">Bold Template</option>
+                        <option value="creative">Creative Template</option>
+                    </select>
+                </div>
+            </header>
+
+            <div class="scroll-content">
+                <form id="resumeForm">
+                    <!-- Profile Photo -->
+                    <div class="section-card">
+                        <h3><i class="fas fa-camera"></i> Profile Photo</h3>
+                        <div class="form-group">
+                            <input type="file" id="photoInput" accept="image/*">
+                        </div>
+                        
+                        <!-- Photo Adjustments -->
+                        <div id="photoControls" class="photo-controls" style="display: none;">
+                            <div class="control-group">
+                                <label>Zoom <span id="zoomVal">1x</span></label>
+                                <input type="range" id="photoZoom" min="1" max="3" step="0.1" value="1">
+                            </div>
+                            <div class="control-group">
+                                <label>Horizontal Position</label>
+                                <input type="range" id="photoX" min="-100" max="100" step="1" value="0">
+                            </div>
+                            <div class="control-group">
+                                <label>Vertical Position</label>
+                                <input type="range" id="photoY" min="-100" max="100" step="1" value="0">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Personal Info -->
+                    <div class="section-card">
+                        <h3><i class="fas fa-user"></i> Personal Info</h3>
+                        <div class="form-group">
+                            <label>Full Name</label>
+                            <input type="text" name="fullName" placeholder="John Doe">
+                        </div>
+                        <div class="form-group">
+                            <label>Job Title</label>
+                            <input type="text" name="jobRole" placeholder="Software Engineer">
+                        </div>
+                        <div class="grid">
+                            <div class="form-group">
+                                <label>Email</label>
+                                <input type="email" name="email" placeholder="john@example.com">
+                            </div>
+                            <div class="form-group">
+                                <label>Phone</label>
+                                <input type="text" name="phone" placeholder="+1 234 567 890">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Address</label>
+                            <input type="text" name="address" placeholder="New York, USA">
+                        </div>
+                        <div class="form-group">
+                            <label>Professional Summary</label>
+                            <textarea name="summary" rows="3" placeholder="Brief professional summary..."></textarea>
+                            <button type="button" class="btn-sm btn-ai" id="aiSummaryBtn"><i class="fas fa-magic"></i>
+                                AI Generate</button>
+                        </div>
+                    </div>
+
+                    <!-- Experience -->
+                    <div class="section-card">
+                        <div class="section-header">
+                            <h3><i class="fas fa-briefcase"></i> Experience</h3>
+                            <button type="button" class="btn-icon" id="addExpBtn"><i class="fas fa-plus"></i></button>
+                        </div>
+                        <div id="experienceList">
+                            <!-- JS will populate -->
+                        </div>
+                    </div>
+
+                    <!-- Education -->
+                    <div class="section-card">
+                        <div class="section-header">
+                            <h3><i class="fas fa-graduation-cap"></i> Education</h3>
+                            <button type="button" class="btn-icon" id="addEduBtn"><i class="fas fa-plus"></i></button>
+                        </div>
+                        <div id="educationList">
+                            <!-- JS will populate -->
+                        </div>
+                    </div>
+
+                    <!-- Skills -->
+                    <div class="section-card">
+                        <h3><i class="fas fa-tools"></i> Skills</h3>
+                        <textarea name="skills" rows="2" placeholder="Java, Python, Leadership..."></textarea>
+                        <button type="button" class="btn-sm btn-ai" id="aiSkillsBtn"><i class="fas fa-magic"></i>
+                            AI Suggest Skills</button>
+                    </div>
+
+                </form>
+            </div>
+
+            <footer class="editor-footer">
+                <button id="downloadPdfBtn" class="btn btn-primary"><i class="fas fa-download"></i> Download
+                    PDF</button>
+            </footer>
+        </aside>
+
+        <!-- RIGHT: PREVIEW -->
+        <main class="preview-pane">
+            <div class="preview-wrapper">
+                <div id="resumePreview" class="resume-paper classic">
+                    <!-- Paper Content -->
+                    <div class="resume-header">
+                        <div class="resume-photo-container" style="display:none;">
+                            <img id="previewPhoto" src="" alt="Profile">
+                        </div>
+                        <div class="header-text">
+                            <h1 id="previewName">Your Name</h1>
+                            <p id="previewRole" class="highlight">Job Title</p>
+                            <div class="contact-info">
+                                <span id="previewEmail">email@example.com</span>
+                                <span id="previewPhone">phone</span>
+                                <span id="previewAddress">address</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="resume-body">
+                        <div class="resume-section" id="previewSummarySection">
+                            <h2 class="section-title">Profile</h2>
+                            <p id="previewSummary">...</p>
+                        </div>
+
+                        <div class="resume-section" id="previewExpSection">
+                            <h2 class="section-title">Experience</h2>
+                            <div id="previewExperienceList"></div>
+                        </div>
+
+                        <div class="resume-section" id="previewEduSection">
+                            <h2 class="section-title">Education</h2>
+                            <div id="previewEducationList"></div>
+                        </div>
+
+                        <div class="resume-section" id="previewSkillsSection">
+                            <h2 class="section-title">Skills</h2>
+                            <ul id="previewSkillsList" class="skills-grid"></ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Hidden Templates for List Items -->
+    <template id="expItemTemplate">
+        <div class="list-item-form">
+            <input type="text" placeholder="Job Title" class="inp-title">
+            <input type="text" placeholder="Company" class="inp-company">
+            <div class="grid">
+                <input type="text" placeholder="Start Date" class="inp-start">
+                <input type="text" placeholder="End Date" class="inp-end">
+            </div>
+            <textarea placeholder="Description" rows="2" class="inp-desc"></textarea>
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+                <button type="button" class="btn-sm btn-ai btn-ai-exp"><i class="fas fa-magic"></i> AI Generate</button>
+                <button type="button" class="btn-remove text-red">Remove</button>
+            </div>
+        </div>
+    </template>
+
+    <template id="eduItemTemplate">
+        <div class="list-item-form">
+            <input type="text" placeholder="Degree" class="inp-degree">
+            <input type="text" placeholder="University" class="inp-uni">
+            <input type="text" placeholder="Year" class="inp-year">
+            <button type="button" class="btn-remove text-red">Remove</button>
+        </div>
+    </template>
+
+    <script src="/script.js"></script>
+</body>
+
+</html>
