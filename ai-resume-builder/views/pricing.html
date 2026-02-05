@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pricing - AI Resume Builder</title>
+    <link rel="stylesheet" href="/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <header>
+        <a href="/" class="logo">CVProfy</a>
+    </header>
+
+    <div class="container">
+        <h1 style="text-align: center;">Simple Pricing</h1>
+        <p style="text-align: center; color: var(--secondary);">Choose the plan that fits you best.</p>
+
+        <div class="pricing-grid">
+            <div class="price-card">
+                <h3>Free</h3>
+                <div class="price">₹0</div>
+                <p>Perfect for trying it out</p>
+                <ul class="features-list">
+                    <li>1 Resume generation</li>
+                    <li>Basic ATS optimization</li>
+                    <li>Watermarked PDF download</li>
+                </ul>
+                <button class="btn btn-outline" style="width: 100%;">Current Plan</button>
+            </div>
+
+            <div class="price-card featured">
+                <div
+                    style="background: var(--primary); color: white; padding: 0.25rem 1rem; border-radius: 999px; font-size: 0.8rem; display: inline-block; margin-bottom: 1rem;">
+                    POPULAR</div>
+                <h3>Pro Download</h3>
+                <div class="price">₹199</div>
+                <p>per download</p>
+                <ul class="features-list">
+                    <li>No Watermark</li>
+                    <li>Priority AI Generation</li>
+                    <li>PDF & DOCX Formats</li>
+                    <li>Premium Templates</li>
+                </ul>
+                <button class="btn btn-primary" style="width: 100%;" onclick="upgradeToPro()">Buy Now</button>
+            </div>
+
+            <div class="price-card">
+                <h3>Unlimited</h3>
+                <div class="price">₹999</div>
+                <p>per month</p>
+                <ul class="features-list">
+                    <li>Unlimited Downloads</li>
+                    <li>Multiple Job Profiles</li>
+                    <li>Cover Letter Generator</li>
+                    <li>Save History</li>
+                </ul>
+                <button class="btn btn-primary" style="width: 100%;">Subscribe</button>
+            </div>
+        </div>
+    </div>
+    <script>
+        function upgradeToPro() {
+            localStorage.setItem('isPremium', 'true');
+            alert('Simulated payment successful! You are now Premium.');
+            window.location.href = '/';
+        }
+    </script>
+</body>
+
+</html>
